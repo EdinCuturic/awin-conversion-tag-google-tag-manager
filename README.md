@@ -1,4 +1,4 @@
-# awin-conversion-tag-google-tag-manager
+# Awin Conversion Tag - Google Tag Manager
 
 The template works by appending our sale attribution technology onto your shop website and populating the relevant variables required to record conversions for your affiliate programme. Use of the Awin Conversion Tag template will not change the appearance of your e-commerce site.
 
