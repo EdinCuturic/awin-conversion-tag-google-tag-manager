@@ -137,7 +137,7 @@ const version = '1.0.0';
 
 var buildNs = function() {
     //build the URL: 
-    var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + data.advertiserId + "&amount=" + AWIN.Tracking.Sale.amount+ "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef  + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&p1=gtmPlugin_" + version;
+    var url = "https://www.awin1.com/sread.img?" + encode("tt=ns&tv=2&merchant=" + data.advertiserId + "&amount=" + AWIN.Tracking.Sale.amount+ "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef  + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&p1=gtmPlugin_" + version);
     
     return url;
 };
