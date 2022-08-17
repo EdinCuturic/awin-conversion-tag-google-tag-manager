@@ -1,5 +1,5 @@
 homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
-  - sha: 4f4fa4e89d426ccad695477b4e5b4b64937f2e87
-    changeNotes: Initial release.
+  - sha: 86dfaacb939d406f2a19abf4429f47cabf487fdf
+    changeNotes: Added customerAcquisition parameter.
