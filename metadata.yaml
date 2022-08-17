@@ -1,5 +1,6 @@
 homepage: "https://www.awin.com"
-documentation: "https://www.awin.com"
+documentation: "https://wiki.awin.com/index.php/Advertiser_Tracking_Guide"
 versions:
+  # Latest version
   - sha: 86dfaacb939d406f2a19abf4429f47cabf487fdf
     changeNotes: Added customerAcquisition parameter.
