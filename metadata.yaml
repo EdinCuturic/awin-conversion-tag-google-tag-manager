@@ -5,5 +5,5 @@ versions:
   - sha: 110c58914eb12d55f777e24afc0029eb683a6b63
     changeNotes: Added zx_products to support mastertag plugin product data
   # Older version
-  - sha: 86dfaacb939d406f2a19abf4429f47cabf487fdf
-    changeNotes: Added customerAcquisition parameter.
+  #- sha: 86dfaacb939d406f2a19abf4429f47cabf487fdf
+  #  changeNotes: Added customerAcquisition parameter.
