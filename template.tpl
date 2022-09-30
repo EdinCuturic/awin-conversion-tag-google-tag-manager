@@ -207,7 +207,7 @@ if (typeof data.plt == "object") {
   data.plt[i].quantity + "|" +
   data.plt[i].sku + "|" +
   data.plt[i].cGroup + "|" +
-  data.plt[i].category + "\n";
+  data.plt[i].category;
   appendPixel("https://www.awin1.com/basket.php?product_line=" + encodeUri(plt));
   }
 }
