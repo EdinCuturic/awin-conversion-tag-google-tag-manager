@@ -4,7 +4,7 @@ versions:
   # Latest version 
   - sha: f43ed16eae06041955263808cd96fdc62987c76d
     changeNotes: Added zx_products to support mastertag plugin product data. Removed new line from PLT request.
-  # Older version
+  # Older versions
   - sha: 86dfaacb939d406f2a19abf4429f47cabf487fdf
     changeNotes: Added customerAcquisition parameter.
   - sha: 4f4fa4e89d426ccad695477b4e5b4b64937f2e87
