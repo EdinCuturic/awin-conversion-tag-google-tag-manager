@@ -2,7 +2,7 @@ homepage: "https://www.awin.com"
 documentation: "https://wiki.awin.com/index.php/Advertiser_Tracking_Guide"
 versions:
   # Latest version 
-  - sha: f8b8d812a42113f7febe5d47303566b657b00cf5
+  - sha: f43ed16eae06041955263808cd96fdc62987c76d
     changeNotes: 
     Added zx_products to support mastertag plugin product data.
     Removed new line from PLT request.
