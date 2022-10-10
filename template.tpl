@@ -14,6 +14,7 @@ ___INFO___
   "version": 1.0.2,
   "securityGroups": [],
   "displayName": "Awin Conversion Tag",
+  "categories": ["AFFILIATE_MARKETING", "ADVERTISING","ATTRIBUTION"],
   "brand": {
     "id": "github.com_EdinCuturic",
     "displayName": "EdinCuturic",
