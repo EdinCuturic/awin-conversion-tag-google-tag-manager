@@ -191,9 +191,6 @@ if (typeof data.plt == "object") {
 }
 window('zx_products', zx_products, true);
 
-const url = 'https://www.dwin1.com/' + data.advertiserId + '.js';
-injectScript(url,data.gtmOnSuccess());
-
 const nsUrl = buildNs();
 appendPixel(nsUrl);
 
@@ -213,6 +210,8 @@ if (typeof data.plt == "object") {
   }
 }
 
+const url = 'https://www.dwin1.com/' + data.advertiserId + '.js';
+injectScript(url,data.gtmOnSuccess(),data.gtmOnFailure());
 
 ___WEB_PERMISSIONS___
 
