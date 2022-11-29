@@ -1,7 +1,7 @@
 homepage: "https://www.awin.com"
 versions:
   # Latest version 
-  - sha: 38a86286efa0f92f0a751ea7c180e8035139abed
+  - sha: 0fee82f1ceb1a5e2a7cef8741fdcbbe3bc2c031d
     changeNotes: Added zx_products to support mastertag plugin product data. Removed new line from PLT request.
   # Older versions
   - sha: 34272481701869099c4292843479c00ead1c8662
