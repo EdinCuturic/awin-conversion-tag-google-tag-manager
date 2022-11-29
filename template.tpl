@@ -11,10 +11,10 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1.0.2,
+  "version": 1,
   "securityGroups": [],
   "displayName": "Awin Conversion Tag",
-  "categories": ["AFFILIATE_MARKETING", "ADVERTISING","ATTRIBUTION"],
+  "categories": ["AFFILIATE_MARKETING","ADVERTISING","ATTRIBUTION"],
   "brand": {
     "id": "github.com_EdinCuturic",
     "displayName": "EdinCuturic",
@@ -157,7 +157,7 @@ AWIN.Tracking = {};
 AWIN.Tracking.Sale = {};
 AWIN.Tracking.Sale.orderRef = data.orderRef || "";
 AWIN.Tracking.Sale.amount = data.amount || "";
-if (data.cg.indexOf("|") != -1 && data.cg.indexOf(":") != -1) {
+if (data.cg.indexOf(":") != -1) {
     AWIN.Tracking.Sale.parts = data.cg;
 } else {
     AWIN.Tracking.Sale.parts = data.cg + ":" + data.amount;
@@ -212,9 +212,6 @@ if (typeof data.plt == "object") {
   appendPixel("https://www.awin1.com/basket.php?product_line=" + encodeUri(plt));
   }
 }
-
-// Call data.gtmOnSuccess when the tag is finished.
-data.gtmOnSuccess();
 
 
 ___WEB_PERMISSIONS___
@@ -444,4 +441,4 @@ scenarios: []
 
 ___NOTES___
 
-Created on 09/01/2020, 16:11:54
+Created on 29/11/2022, 11:00:54
