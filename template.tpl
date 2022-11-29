@@ -25,7 +25,7 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1.0.2,
+  "version": 2,
   "securityGroups": [],
   "displayName": "Awin Conversion Tag",
   "categories": ["AFFILIATE_MARKETING","ADVERTISING","ATTRIBUTION"],
