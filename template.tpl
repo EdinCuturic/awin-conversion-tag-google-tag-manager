@@ -11,10 +11,10 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1.0.2,
+  "version": 1
   "securityGroups": [],
   "displayName": "Awin Conversion Tag",
-  "categories": ["AFFILIATE_MARKETING", "ADVERTISING", "ATTRIBUTION","ANALYTICS"],
+  "categories": ["AFFILIATE_MARKETING", "ADVERTISING", "ATTRIBUTION"],
   "brand": {
     "id": "github.com_EdinCuturic",
     "displayName": "Awin",
