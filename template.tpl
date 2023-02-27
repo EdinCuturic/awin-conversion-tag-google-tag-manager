@@ -145,7 +145,7 @@ const appendPixel = require('sendPixel');
 const encodeUriComponent = require('encodeUriComponent');
 const getType = require('getType');
 const getUrl = require('getUrl');
-const version = '1.0.2';
+const version = '1.0.3';
 
 function enc(data) {
   data = data || '';
