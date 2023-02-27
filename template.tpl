@@ -14,7 +14,11 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Awin Conversion Tag",
-  "categories": ["AFFILIATE_MARKETING", "ADVERTISING", "ATTRIBUTION"],
+  "categories": [
+    "AFFILIATE_MARKETING",
+    "ADVERTISING",
+    "ATTRIBUTION"
+  ],
   "brand": {
     "id": "github.com_EdinCuturic",
     "displayName": "Awin",
@@ -138,41 +142,37 @@ const injectScript = require('injectScript');
 const window = require('setInWindow');
 const readCookie = require('getCookieValues');
 const appendPixel = require('sendPixel');
-const encodeUri = require('encodeUri');
-const decodeUri = require('decodeUri');
 const encodeUriComponent = require('encodeUriComponent');
 const getType = require('getType');
 const getUrl = require('getUrl');
 const version = '1.0.2';
 
-var buildNs = function() {
-    //build the URL: 
-    var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + encodeUri(data.advertiserId + "&amount=" + AWIN.Tracking.Sale.amount + "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef  + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + decodeUri(AWIN.Tracking.Sale.voucher) + "&customeracquisition=" + data.customerAcquisition + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&p1=gtmPlugin_" + version);
-    
-    return url;
-};
+function enc(data) {
+  data = data || '';
+  return encodeUriComponent(data);
+}
 
 var AWIN = {};
 AWIN.Tracking = {};
 AWIN.Tracking.Sale = {};
-AWIN.Tracking.Sale.orderRef = data.orderRef || "";
-AWIN.Tracking.Sale.amount = data.amount || "";
+AWIN.Tracking.Sale.orderRef = enc(data.orderRef);
+AWIN.Tracking.Sale.amount = enc(data.amount);
 if (data.cg.indexOf(":") != -1) {
-    AWIN.Tracking.Sale.parts = data.cg;
+    AWIN.Tracking.Sale.parts = enc(data.cg);
 } else {
-    AWIN.Tracking.Sale.parts = data.cg + ":" + data.amount;
+    AWIN.Tracking.Sale.parts = enc(data.cg + ":" + data.amount);
 }
-AWIN.Tracking.Sale.currency = data.currency || "";
-AWIN.Tracking.Sale.channel = data.channel;
-AWIN.Tracking.Sale.voucher = encodeUri(data.voucher) || "";
-AWIN.Tracking.Sale.customerAcquisition = data.customerAcquisition || "";
-AWIN.Tracking.Sale.test = data.test;
+AWIN.Tracking.Sale.currency = enc(data.currency);
+AWIN.Tracking.Sale.channel = enc(data.channel);
+AWIN.Tracking.Sale.voucher = enc(data.voucher);
+AWIN.Tracking.Sale.customerAcquisition = enc(data.customerAcquisition);
+AWIN.Tracking.Sale.test = enc(data.test);
 AWIN.Tracking.Sale.custom = [];
 AWIN.Tracking.Sale.custom[0] = "gtmPlugin_" + version;
 if (data.custom && getType(data.custom) == "array") {
   var index = 1;
   for (var i = 0; i < data.custom.length; i++) {
-    AWIN.Tracking.Sale.custom[index] = encodeUri(data.custom[i]);
+    AWIN.Tracking.Sale.custom[index] = enc(data.custom[i]);
     index++;
   }
 }
@@ -191,6 +191,13 @@ if (typeof data.plt == "object") {
 }
 window('zx_products', zx_products, true);
 
+var buildNs = function() {
+    //build the URL: 
+    var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + enc(data.advertiserId) + "&amount=" + AWIN.Tracking.Sale.amount + "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef  + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&customeracquisition=" + AWIN.Tracking.Sale.customerAcquisition + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&p1=gtmPlugin_" + version;
+    
+    return url;
+};
+
 const nsUrl = buildNs();
 appendPixel(nsUrl);
 
@@ -206,12 +213,13 @@ if (typeof data.plt == "object") {
   data.plt[i].sku + "|" +
   data.plt[i].cGroup + "|" +
   data.plt[i].category;
-  appendPixel("https://www.awin1.com/basket.php?product_line=" + encodeUri(plt));
+  appendPixel("https://www.awin1.com/basket.php?product_line=" + encodeUriComponent(plt));
   }
 }
 
 const url = 'https://www.dwin1.com/' + data.advertiserId + '.js';
 injectScript(url,data.gtmOnSuccess(),data.gtmOnFailure());
+
 
 ___WEB_PERMISSIONS___
 
