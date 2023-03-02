@@ -145,7 +145,7 @@ const appendPixel = require('sendPixel');
 const encodeUriComponent = require('encodeUriComponent');
 const getType = require('getType');
 const getUrl = require('getUrl');
-const version = '1.0.3';
+const version = '1.0.4';
 
 function enc(data) {
   data = data || '';
@@ -176,6 +176,11 @@ if (data.custom && getType(data.custom) == "array") {
     index++;
   }
 }
+//set testmode to 1 if url is appspot.com
+if(getUrl().search('appspot.com') != -1){
+  AWIN.Tracking.Sale.test = 1;
+}
+
 window('AWIN', AWIN, true);
 
 //zx_products to support mastertag plugin product data
