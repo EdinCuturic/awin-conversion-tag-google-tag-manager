@@ -1,9 +1,11 @@
 homepage: "https://www.awin.com"
 versions:
   # Latest version 
+  - sha: c0b61845121853f4a09a8083b6
+    changeNotes: setting the testmode to 1 if url served is https://gtm-msr.appspot.com
+  # Older versions
   - sha: 6f4b22539d8e5dbfce67a910ebb111e63f53d7db
     changeNotes: encodeUri replaced with encodeUriComponent.
-  # Older versions
   - sha: d26347ca76e287ad4bca4f99204af033823dbc9d
     changeNotes: Added zx_products to support mastertag plugin product data. Removed new line from PLT request.
   - sha: 34272481701869099c4292843479c00ead1c8662
