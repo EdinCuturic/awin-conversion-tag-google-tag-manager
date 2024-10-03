@@ -264,15 +264,17 @@ const appendPixel = require('sendPixel');
 const encodeUriComponent = require('encodeUriComponent');
 const getType = require('getType');
 const getUrl = require('getUrl');
-const version = '1.0.5';
+const version = '1.0.6';
+const copyFromWindow = require('copyFromWindow'); 
+const existingAwinObject = copyFromWindow('AWIN'); 
 
 function enc(data) {
   data = data || '';
   return encodeUriComponent(data);
 }
 
-var AWIN = {};
-AWIN.Tracking = {};
+var AWIN = existingAwinObject || {};
+AWIN.Tracking = AWIN.Tracking || {};
 AWIN.Tracking.Sale = {};
 AWIN.Tracking.Sale.orderRef = enc(data.orderRef);
 AWIN.Tracking.Sale.amount = enc(data.amount);
@@ -318,7 +320,10 @@ window('zx_products', zx_products, true);
 var buildNs = function() {
     //build the URL: 
     var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + enc(data.advertiserId) + "&amount=" + AWIN.Tracking.Sale.amount + "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef  + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&customeracquisition=" + AWIN.Tracking.Sale.customerAcquisition + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&p1=gtmPlugin_" + version;
-    
+  
+    if (AWIN.Tracking.AdvertiserConsent !== undefined) {
+      url += "&cons=" + (AWIN.Tracking.AdvertiserConsent ? "1" : "0");
+    }
     return url;
 };
 
