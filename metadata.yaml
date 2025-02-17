@@ -1,9 +1,11 @@
 homepage: "https://www.awin.com"
 versions:
   # Latest version 
+  - sha: 2a94df4ef4455f943b8a8221862b9e7984d38c95
+    changeNotes: Fix, added p1 identifier into img tag.
+  # Older versions
   - sha: e7651ea3b74c6aefbcef53497ee710e8757e2c57
     changeNotes: Added support for GA4 dataLayer keys in PLT. Added support for splitting PLT commission groups according to parts price. Added support for Consent Signals Plugin indentifier.
-  # Older versions
   - sha: bb41feaa441206bfcb866430049501712d7e677a
     changeNotes: Added support for Awin Consent Signals.
   - sha: 537c0959ced9e8cb6527e1c3b42373716341ea0f
