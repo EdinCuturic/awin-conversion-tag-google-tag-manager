@@ -12,7 +12,6 @@ ___INFO___
   "type": "TAG",
   "id": "cvt_NC6HJ",
   "version": 1,
-  "securityGroups": [],
   "displayName": "Awin Conversion Tag",
   "categories": [
     "AFFILIATE_MARKETING",
@@ -27,7 +26,8 @@ ___INFO___
   "description": "Awin’s Conversion tag detects when a conversion has taken place and reports the tracking details to Awin’s servers.",
   "containerContexts": [
     "WEB"
-  ]
+  ],
+  "securityGroups": []
 }
 
 
@@ -322,7 +322,7 @@ window('zx_products', zx_products, true);
 
 var buildNs = function() {
     //build the URL: 
-    var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + enc(data.advertiserId) + "&amount=" + AWIN.Tracking.Sale.amount + "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef  + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&customeracquisition=" + AWIN.Tracking.Sale.customerAcquisition + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&p1=" + AWIN.Tracking.Sale.custom[0];
+    var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + enc(data.advertiserId) + "&amount=" + AWIN.Tracking.Sale.amount + "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&customeracquisition=" + AWIN.Tracking.Sale.customerAcquisition + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&cks=" + readAwcCookie(AWIN.Tracking.AdvertiserConsent) + "&p1=" + AWIN.Tracking.Sale.custom[0];
   
     if (AWIN.Tracking.AdvertiserConsent !== undefined) {
       url += "&cons=" + (AWIN.Tracking.AdvertiserConsent ? "1" : "0");
@@ -378,6 +378,35 @@ if (typeof data.plt == "object") {
 }
 
 const url = 'https://www.dwin1.com/' + data.advertiserId + '.js';
+
+function readAwcCookie(consentStatus) {
+  //read cookies
+  var regularCookie = readCookie('_aw_m_' + data.advertiserId).toString();
+  var snCookie = readCookie('_aw_sn_' + data.advertiserId).toString();
+  //if snCookie is present then add it to cookieString
+  var cookieString = snCookie;
+  //if consent, then try to read normal cookie
+  if (evaluateConsent(consentStatus) && regularCookie.length > 0) {
+      // If regularCookie is not empty, then concatenate it with a comma
+      cookieString += (cookieString.length > 0 ? ',' : '') + regularCookie;
+  }
+
+  return cookieString;
+}
+
+//function to evaluate the consent state
+function evaluateConsent(consent) {
+  if (typeof consent === 'string') {
+    if (consent.toLowerCase() === 'true' || consent === '1') {
+      return true;
+    } else if (consent.toLowerCase() === 'false' || consent === '0') {
+      return false;
+    }
+  } else if (consent == true || consent == false) {
+    return consent == true;
+  }
+  return true;
+}
 injectScript(url,data.gtmOnSuccess(),data.gtmOnFailure());
 
 
