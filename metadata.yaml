@@ -1,4 +1,5 @@
 homepage: "https://www.awin.com"
+documentation: "https://developer.awin.com/docs/gtm-client-side"
 versions:
   # Latest version 
   - sha: ef7ef6e679866312f3e6668397d96d1b01074bfc
