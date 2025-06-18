@@ -265,8 +265,8 @@ const encodeUriComponent = require('encodeUriComponent');
 const getType = require('getType');
 const getUrl = require('getUrl');
 const version = '1.0.7';
-const copyFromWindow = require('copyFromWindow'); 
-const existingAwinObject = copyFromWindow('AWIN'); 
+const copyFromWindow = require('copyFromWindow');
+const existingAwinObject = copyFromWindow('AWIN');
 
 function enc(data) {
   data = data || '';
@@ -279,9 +279,9 @@ AWIN.Tracking.Sale = {};
 AWIN.Tracking.Sale.orderRef = enc(data.orderRef);
 AWIN.Tracking.Sale.amount = enc(data.amount);
 if (data.cg.indexOf(":") != -1) {
-    AWIN.Tracking.Sale.parts = enc(data.cg);
+  AWIN.Tracking.Sale.parts = enc(data.cg);
 } else {
-    AWIN.Tracking.Sale.parts = enc(data.cg + ":" + data.amount);
+  AWIN.Tracking.Sale.parts = enc(data.cg + ":" + data.amount);
 }
 AWIN.Tracking.Sale.currency = enc(data.currency);
 AWIN.Tracking.Sale.channel = enc(data.channel);
@@ -301,7 +301,7 @@ if (data.custom && getType(data.custom) == "array") {
   }
 }
 //set testmode to 1 if url is appspot.com
-if(getUrl().search('appspot.com') != -1){
+if (getUrl().search('appspot.com') != -1) {
   AWIN.Tracking.Sale.test = 1;
 }
 
@@ -310,7 +310,7 @@ window('AWIN', AWIN, true);
 //zx_products to support mastertag plugin product data
 if (typeof data.plt == "object") {
   var zx_products = [];
-  for (var i =0;i < data.plt.length; i++) {
+  for (var i = 0; i < data.plt.length; i++) {
     var o = {};
     o.identifier = data.plt[i].id;
     o.quantity = data.plt[i].quantity;
@@ -320,15 +320,20 @@ if (typeof data.plt == "object") {
 }
 window('zx_products', zx_products, true);
 
-var buildNs = function() {
-    //build the URL: 
-    var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + enc(data.advertiserId) + "&amount=" + AWIN.Tracking.Sale.amount + "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&customeracquisition=" + AWIN.Tracking.Sale.customerAcquisition + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&cks=" + readAwcCookie(AWIN.Tracking.AdvertiserConsent) + "&p1=" + AWIN.Tracking.Sale.custom[0];
-  
-    if (AWIN.Tracking.AdvertiserConsent !== undefined) {
-      url += "&cons=" + (AWIN.Tracking.AdvertiserConsent ? "1" : "0");
-    }
-  
-    return url;
+var buildNs = function () {
+  //build the URL: 
+  var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + enc(data.advertiserId) + "&amount=" + AWIN.Tracking.Sale.amount + "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&customeracquisition=" + AWIN.Tracking.Sale.customerAcquisition + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&cks=" + readAwcCookie(AWIN.Tracking.AdvertiserConsent);
+
+  if (AWIN.Tracking.AdvertiserConsent !== undefined) {
+    url += "&cons=" + (AWIN.Tracking.AdvertiserConsent ? "1" : "0");
+  }
+
+  var customParams = AWIN.Tracking.Sale.custom.map(function (value, index) {
+    return "&p" + (index + 1) + "=" + value;
+  }).join("");
+  url += customParams;
+
+  return url;
 };
 
 const nsUrl = buildNs();
@@ -338,7 +343,7 @@ appendPixel(nsUrl);
 //unpack multiple cgs into a json
 if (data.cg.indexOf('|') > 0) {
   var individualParts = data.cg.split("|");
-  var invertedPartsObject = individualParts.reduce(function(obj, item) {
+  var invertedPartsObject = individualParts.reduce(function (obj, item) {
     var parts = item.split(":");
     //invert the key-value pair so that we can access the cg code using the price as key
     var key = parts[1];
@@ -357,23 +362,23 @@ let productCg = data.productCg;
 let productCategory = data.productCategory;
 
 if (typeof data.plt == "object") {
-  for (var i = 0; i < data.plt.length;i++) {
-  var plt = "";
-  var price = (data.plt[i][productPrice] || data.plt[i].price);
-  //set the cg according to price  
-  if (invertedPartsObject){
-    var cgPerProduct = invertedPartsObject[price];
-  }
-   
-  plt += "AW:P|" + data.advertiserId + "|"+ AWIN.Tracking.Sale.orderRef + "|" +
-  (data.plt[i][productId] || data.plt[i].id || data.plt[i].item_id) + "|" +
-  (data.plt[i][productName] || data.plt[i].name || data.plt[i].item_name) + "|" +
-   price + "|" +
-  (data.plt[i][productQuantity] || data.plt[i].quantity) + "|" +
-  (data.plt[i][productSku] || data.plt[i].sku || data.plt[i].item_id) + "|" +
-  (data.plt[i][productCg] || data.plt[i].cGroup || productCg || cgPerProduct || "DEFAULT") + "|" +
-  (data.plt[i][productCategory] || data.plt[i].category || data.plt[i].item_category);
-  appendPixel("https://www.awin1.com/basket.php?product_line=" + encodeUriComponent(plt));
+  for (var i = 0; i < data.plt.length; i++) {
+    var plt = "";
+    var price = (data.plt[i][productPrice] || data.plt[i].price);
+    //set the cg according to price  
+    if (invertedPartsObject) {
+      var cgPerProduct = invertedPartsObject[price];
+    }
+
+    plt += "AW:P|" + data.advertiserId + "|" + AWIN.Tracking.Sale.orderRef + "|" +
+      (data.plt[i][productId] || data.plt[i].id || data.plt[i].item_id) + "|" +
+      (data.plt[i][productName] || data.plt[i].name || data.plt[i].item_name) + "|" +
+      price + "|" +
+      (data.plt[i][productQuantity] || data.plt[i].quantity) + "|" +
+      (data.plt[i][productSku] || data.plt[i].sku || data.plt[i].item_id) + "|" +
+      (data.plt[i][productCg] || data.plt[i].cGroup || productCg || cgPerProduct || "DEFAULT") + "|" +
+      (data.plt[i][productCategory] || data.plt[i].category || data.plt[i].item_category);
+    appendPixel("https://www.awin1.com/basket.php?product_line=" + encodeUriComponent(plt));
   }
 }
 
@@ -387,8 +392,8 @@ function readAwcCookie(consentStatus) {
   var cookieString = snCookie;
   //if consent, then try to read normal cookie
   if (evaluateConsent(consentStatus) && regularCookie.length > 0) {
-      // If regularCookie is not empty, then concatenate it with a comma
-      cookieString += (cookieString.length > 0 ? ',' : '') + regularCookie;
+    // If regularCookie is not empty, then concatenate it with a comma
+    cookieString += (cookieString.length > 0 ? ',' : '') + regularCookie;
   }
 
   return cookieString;
@@ -407,7 +412,7 @@ function evaluateConsent(consent) {
   }
   return true;
 }
-injectScript(url,data.gtmOnSuccess(),data.gtmOnFailure());
+injectScript(url, data.gtmOnSuccess(), data.gtmOnFailure());
 
 
 ___WEB_PERMISSIONS___
