@@ -65,10 +65,14 @@ window('zx_products', zx_products, true);
 
 var buildNs = function () {
   //build the URL: 
-  var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + enc(data.advertiserId) + "&amount=" + AWIN.Tracking.Sale.amount + "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&customeracquisition=" + AWIN.Tracking.Sale.customerAcquisition + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&cks=" + readAwcCookie(AWIN.Tracking.AdvertiserConsent);
+  var url = "https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=" + enc(data.advertiserId) + "&amount=" + AWIN.Tracking.Sale.amount + "&cr=" + AWIN.Tracking.Sale.currency + "&ref=" + AWIN.Tracking.Sale.orderRef + "&parts=" + AWIN.Tracking.Sale.parts + "&vc=" + AWIN.Tracking.Sale.voucher + "&t=" + AWIN.Tracking.Sale.test + "&ch=" + AWIN.Tracking.Sale.channel + "&cks=" + readAwcCookie(AWIN.Tracking.AdvertiserConsent);
 
   if (AWIN.Tracking.AdvertiserConsent !== undefined) {
     url += "&cons=" + (AWIN.Tracking.AdvertiserConsent ? "1" : "0");
+  }
+
+  if (AWIN.Tracking.Sale.customerAcquisition) {
+    url += "&customeracquisition=" + AWIN.Tracking.Sale.customerAcquisition;
   }
 
   var customParams = AWIN.Tracking.Sale.custom.map(function (value, index) {
