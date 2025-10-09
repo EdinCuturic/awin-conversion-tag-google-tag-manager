@@ -1,10 +1,12 @@
 homepage: "https://www.awin.com"
 documentation: "https://developer.awin.com/docs/gtm-client-side"
-versions:
+versions: 
   # Latest version 
+  - sha: 13a85b0b4f5abc51651fbfba36fc8d12cb16064a
+    changeNotes: Added added condition to exclude customeracquisition parameter from img/ns tag when value is of type undefined.
+  # Older versions
   - sha: 4b46519f4905735b3e60e3a4744cb30e9ff194b1
     changeNotes: Added support for custom parameters in ns tag.
-  # Older versions
   - sha: ef7ef6e679866312f3e6668397d96d1b01074bfc
     changeNotes: Added support for cks parameter in img tag.
   - sha: 2a94df4ef4455f943b8a8221862b9e7984d38c95
